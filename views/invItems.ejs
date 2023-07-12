@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Shoes Inventory</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="https://use.typekit.net/lcz4pag.css">
+</head>
+
+<body>
+
+	<nav>
+		<div class="nav-wrapper">
+		<a href="#!" class="brand-logo">SHOES INVENTORY</a>
+		<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+		<ul class="right hide-on-med-and-down">
+			<li><a href="/">Home</a></li>
+			<li><a href="/logout">Logout</a></li>
+			
+		</ul>
+		</div>
+		<ul class="sidenav" id="mobile-demo">
+			<li><a href="/">Home</a></li>
+			<li><a href="/logout">Logout</a></li>
+			
+		</ul>
+  	</nav>
+	
+
+	<div class="wrapper">
+		<h1 class="card-title">Inventory Items</h1>
+		
+		<div class="card">
+			<div id="myModal" class="modal" style="width: 50%;">
+				<div class="modal-content">
+					<span class="close" style=" float: right; font-size: 50px; font-weight: bold; cursor:pointer;">&times;</span>
+					<h5>Add Item</h5>
+					<form action="/invItems/createInvItem" method='POST'>
+						<input type="text" placeholder="Enter Item Name" name='itemName'>
+						<input type="number" placeholder="Enter Serial" name='SKU'>
+						<input type="number" placeholder="Enter Quantity" name='quantity'>
+						<input class='btn' type="submit">
+					</form>
+				</div>
+			</div>
+			
+			<button id="openModalBtn" class="btn" style="float: right; margin-right: 25px;">Add Item</button>
+		<ul class="card-content subcard">
+			
+			<li class="col-head">
+				<div class="skuCol">Serial</div>
+				<div class="nameCol">Name</div>
+				<div class="quantityCol">Quantity</div>
+				<div class="availableCol">Available</div>
+			</li>
+			<% items.forEach( el=> { %>
+				<li class='invItem' data-id='<%=el._id%>' data-itemname="<%= el.itemName %>">
+					<span class='skuCol'>
+						<%= el.SKU %>
+					</span>
+					<span class='nameCol'>
+						<%= el.itemName %>
+					</span>
+					<span class='quantityCol'>
+						<%= el.quantity%>
+					</span>
+					<span class='availableCol'>
+						<%= el.quantity> 0 ? "Yes" : "No" %>
+					</span>
+					<span class="edit">
+						<input type="number" class="newQuantity" name="newQuantity">
+						<span class="changeQuantity btn"> Change Quantity </span>
+					</span>
+					<span class="del">
+						<i class="bx bx-trash"></i>
+					</span>
+				</li>
+				<% }) %>
+			</ul>
+		</div>
+	</div>
+</div>
+<script src="js/script.js"></script>
+</body>
+
+<footer class="page-footer fixed-bottom">
+	<div class="footer-copyright">
+		<div class="container" style="text-align: center;">
+		© 2023 Copyright ITT626 Group Project
+		</div>
+	</div>
+</footer>
+
+</html>
